@@ -104,17 +104,18 @@ const Documents = () => {
 
                 {/* VIEW */}
                 <a
-                  href={`${BASE_URL}/uploads/${doc.fileUrl}`}
+                  href={doc.fileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
-      px-4 py-1.5 rounded-md text-sm font-medium
-      bg-blue-600 text-white
-      hover:bg-blue-700 transition
-    "
+    px-4 py-1.5 rounded-md text-sm font-medium
+    bg-blue-600 text-white
+    hover:bg-blue-700 transition
+  "
                 >
                   View
                 </a>
+
 
                 {/* EDIT */}
                 <Link

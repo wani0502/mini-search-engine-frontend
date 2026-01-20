@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getPublicDocuments } from "../services/api";
-const BASE_URL = import.meta.env.VITE_API_URL;
+
 const PublicDocuments = () => {
   const [docs, setDocs] = useState([]);
 
@@ -32,9 +32,9 @@ const PublicDocuments = () => {
             className="border p-4 rounded mb-4 space-y-3"
           >
             {/* IMAGE PREVIEW (only if image) */}
-            {(doc.fileType === "png" || doc.fileType === "jpg") && (
+            {["png", "jpg", "jpeg", "webp"].includes(doc.fileType) && (
               <img
-                src={`${BASE_URL}/uploads/${doc.fileUrl}`}
+                src={doc.fileUrl}
                 alt={doc.title}
                 className="max-h-64 rounded border"
               />
@@ -43,7 +43,9 @@ const PublicDocuments = () => {
             <div className="flex justify-between items-center">
               <div>
                 <h3 className="font-semibold text-lg">{doc.title}</h3>
-                <p className="text-gray-600">{doc.description}</p>
+                <p className="text-gray-600">
+                  {doc.description || "No description"}
+                </p>
 
                 <p className="text-sm text-gray-500">
                   Type: {doc.fileType}
@@ -59,10 +61,11 @@ const PublicDocuments = () => {
 
               {/* VIEW BUTTON */}
               <a
-                href={`${BASE_URL}/uploads/${doc.fileUrl}`}
+                href={doc.fileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-blue-600 text-white rounded"
+                className="px-4 py-2 bg-blue-600 text-white rounded
+                           hover:bg-blue-700 transition"
               >
                 View
               </a>
